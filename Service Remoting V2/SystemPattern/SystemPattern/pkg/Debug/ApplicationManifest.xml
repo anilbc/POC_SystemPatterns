@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="SystemPatternType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" ManifestId="0f03f557-894f-48bb-8625-4124483ce1f7">
+  <Parameters>
+    <Parameter Name="ServiceHelper_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ServiceHelper_PartitionCount" DefaultValue="1" />
+    <Parameter Name="ServiceHelper_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="SystemPattern.API_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="SystemPattern.ProductCatalog_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="SystemPattern.ProductCatalog_PartitionCount" DefaultValue="1" />
+    <Parameter Name="SystemPattern.ProductCatalog_TargetReplicaSetSize" DefaultValue="3" />
+  </Parameters>
+  <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
+       should match the Name and Version attributes of the ServiceManifest element defined in the 
+       ServiceManifest.xml file. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ServiceHelperPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="SystemPattern.APIPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="SystemPattern.ProductCatalogPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <DefaultServices>
+    <!-- The section below creates instances of service types, when an instance of this 
+         application type is created. You can also create one or more instances of service type using the 
+         ServiceFabric PowerShell module.
+         
+         The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
+    <Service Name="ServiceHelper" ServicePackageActivationMode="ExclusiveProcess">
+      <StatefulService ServiceTypeName="ServiceHelperType" TargetReplicaSetSize="[ServiceHelper_TargetReplicaSetSize]" MinReplicaSetSize="[ServiceHelper_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ServiceHelper_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="SystemPattern.API" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="SystemPattern.APIType" InstanceCount="[SystemPattern.API_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+    <Service Name="SystemPattern.ProductCatalog" ServicePackageActivationMode="ExclusiveProcess">
+      <StatefulService ServiceTypeName="SystemPattern.ProductCatalogType" TargetReplicaSetSize="[SystemPattern.ProductCatalog_TargetReplicaSetSize]" MinReplicaSetSize="[SystemPattern.ProductCatalog_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[SystemPattern.ProductCatalog_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

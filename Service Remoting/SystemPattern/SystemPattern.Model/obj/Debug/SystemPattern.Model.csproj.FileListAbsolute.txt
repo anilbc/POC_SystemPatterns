@@ -1,0 +1,6 @@
+c:\users\aalla\source\repos\SystemPattern\SystemPattern.Model\bin\Debug\SystemPattern.Model.dll
+c:\users\aalla\source\repos\SystemPattern\SystemPattern.Model\bin\Debug\SystemPattern.Model.pdb
+c:\users\aalla\source\repos\SystemPattern\SystemPattern.Model\obj\Debug\SystemPattern.Model.csprojResolveAssemblyReference.cache
+c:\users\aalla\source\repos\SystemPattern\SystemPattern.Model\obj\Debug\SystemPattern.Model.csproj.CoreCompileInputs.cache
+c:\users\aalla\source\repos\SystemPattern\SystemPattern.Model\obj\Debug\SystemPattern.Model.dll
+c:\users\aalla\source\repos\SystemPattern\SystemPattern.Model\obj\Debug\SystemPattern.Model.pdb

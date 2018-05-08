@@ -1,0 +1,1 @@
+c:\users\aalla\source\repos\SystemPattern\SystemPattern\obj\x64\Debug\SystemPattern.sfproj.CoreCompileInputs.cache
